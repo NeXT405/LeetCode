@@ -3,21 +3,21 @@ package bis20;
 public class Level27RemoveElement {
 
 	/*
-	 * Given an array and a value, remove all instances of that value in-place
-	 * and return the new length.
+	 * Given an array and a value, remove all instances of that value in-place and
+	 * return the new length.
 	 *
-	 * Do not allocate extra space for another array, you must do this by
-	 * modifying the input array in-place with O(1) extra memory.
+	 * Do not allocate extra space for another array, you must do this by modifying
+	 * the input array in-place with O(1) extra memory.
 	 *
-	 * The order of elements can be changed. It doesn't matter what you leave
-	 * beyond the new length.
+	 * The order of elements can be changed. It doesn't matter what you leave beyond
+	 * the new length.
 	 *
 	 * Example:
 	 *
 	 * Given nums = [3,2,2,3], val = 3,
 	 *
-	 * Your function should return length = 2, with the first two elements of
-	 * nums being 2.
+	 * Your function should return length = 2, with the first two elements of nums
+	 * being 2.
 	 * 
 	 */
 
@@ -25,7 +25,7 @@ public class Level27RemoveElement {
 		// TODO Auto-generated method stub
 		int[] nums = { 3, 2, 2, 3 };
 
-		System.out.println(removeElement(nums, 3));
+		System.out.println(removeElement(nums, 2));
 	}
 
 	public static int removeElement(int[] nums, int val) {
@@ -40,23 +40,29 @@ public class Level27RemoveElement {
 		}
 
 		int i = 0;
+		boolean last = false;
 		for (int a = 0; a < nums.length; a++) {
+			if (nums.length == a + 1) {
+				last = true;
+			}
+
 			if (nums[a] == val) {
 				if (a + 1 < nums.length) {
 					nums[a] = nums[a + 1];
 					i++;
-				} 
+				} else if(nums[a] == val) {
+					i++;
+				}
 
 				for (int b = a; b < nums.length; b++) {
 					// System.out.println(nums[b]);
 					if (b + 1 < nums.length) {
-						nums[b] = nums[b + 1];
-					}
+						if (!last) {
+							nums[b] = nums[b + 1];
+						}
+					} 
 				}
 			}
-		}
-		if (i == 0) {
-			return nums.length;
 		}
 		return nums.length - i;
 	}
